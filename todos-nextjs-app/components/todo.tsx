@@ -3,7 +3,23 @@ import Checkbox from './checkbox'
 
 export default function Todo({ todo, reloadList }) {
   //TODO: implement toggle checkbox
-  const toggleCompleted = () => {}
+  const toggleCompleted = (event) => {
+    axios({
+      url: `api/todos/${todo._id}`,
+      method: 'PUT',
+      data: {
+        text: todo.text,
+        completed: event.target.checked,
+      },
+    }).then((res) => {
+      if (res.status !== 200) {
+        console.error('Error create todo from api!')
+        console.error(res)
+        return
+      }
+      reloadList()
+    })
+  }
 
   const deleteTodo = () => {
     axios.delete('/api/todos/' + todo._id).then(reloadList)

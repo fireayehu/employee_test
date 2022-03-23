@@ -40,6 +40,19 @@ describe('TodoController Class Testing', () => {
     expect(editedTodo.data.text).toEqual('Test todo edited');
   });
 
+  test('Edit Todo Order', async () => {
+    const order = {
+      source: 2,
+      destination: 3,
+    };
+
+    const editedOrder = todosController.updateOrder(order);
+
+    expect(editedOrder.error).toBe(null);
+    expect(editedOrder.data).toBeDefined();
+    expect(editedOrder.data).toEqual('Data ordered updated!');
+  });
+
   test('Delete Todo', async () => {
     const todo = {
       text: 'Test todo',

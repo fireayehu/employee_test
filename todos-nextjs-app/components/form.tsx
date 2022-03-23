@@ -6,7 +6,25 @@ export default function Form({ reloadList }) {
   const [text, setText] = useState('')
 
   // TODO: implement todo creation
-  const createTodo = (event) => {}
+  const createTodo = (event) => {
+    event.preventDefault()
+    if (!text) return
+    axios({
+      url: 'api/todos',
+      method: 'POST',
+      data: {
+        text,
+      },
+    }).then((res) => {
+      if (res.status !== 200) {
+        console.error('Error create todo from api!')
+        console.error(res)
+        return
+      }
+      setText('')
+      reloadList()
+    })
+  }
 
   return (
     <form

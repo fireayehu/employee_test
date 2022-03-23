@@ -32,6 +32,14 @@ export class TodosDal {
     return editedTodo;
   }
 
+  editOrder(source: number, destination: number) {
+    const items = Array.from(this.todosArray);
+    const [reorderedItem] = items.splice(source, 1);
+    items.splice(destination, 0, reorderedItem);
+
+    this.todosArray = items;
+  }
+
   getAll(): Todo[] {
     return this.todosArray;
   }
